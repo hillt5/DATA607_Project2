@@ -1,0 +1,28 @@
+fieldset#funding_tool_ajax_content {
+  padding: 0;
+  margin: 0;
+  border: none;
+}
+
+fieldset#funding_tool_ajax_content > .fieldset-wrapper {
+  padding: 0;
+}
+
+td.tags {
+  font-size: .85em;
+}
+
+.funding_tool_filters .form-item-type,
+.funding_tool_filters .form-item-status,
+.funding_tool_filters .form-item-agency {
+  float: left;
+  margin: 0 20px 0 0;
+}
+
+.funding_tool_filters .form-item-search {
+  clear: both;
+}
+
+.nowrap {
+  white-space: nowrap;
+}

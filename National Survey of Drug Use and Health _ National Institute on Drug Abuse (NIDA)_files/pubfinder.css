@@ -1,0 +1,254 @@
+/**
+ * form stuff
+ */
+
+#pubfinder-search-form .form-item-query {
+  display: inline-block;
+  width: 68%;
+  margin: 10px 0;
+}
+
+#pubfinder-search-form .form-item-query input {
+  width: 100%;
+  height: 31px;
+  margin-top:-1px;
+}
+
+#pubfinder-short-search-form input[type="submit"],
+#pubfinder-search-form input.advanced-search-submit,
+#pubfinder-search-form input.main-submit,
+#pubfinder-search-form input[type="submit"] {
+  color: #fff;
+  text-shadow: none;
+  padding: 9px 20px;
+  background: #3c8eb4;
+  background: -moz-linear-gradient(top, #3c8eb4 0%, #0b5572 100%);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #3c8eb4), color-stop(100%, #0b5572));
+  background: -webkit-linear-gradient(top, #3c8eb4 0%, #0b5572 100%);
+  background: -o-linear-gradient(top, #3c8eb4 0%, #0b5572 100%);
+  background: -ms-linear-gradient(top, #3c8eb4 0%, #0b5572 100%);
+  background: linear-gradient(to bottom, #3c8eb4 0%, #0b5572 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#3c8eb4', endColorstr='#0b5572', GradientType=0);
+  position: relative;
+  top: -1px;
+  border:none;
+  border-radius:4px;
+  margin-right: 4px;
+}
+#pubfinder-search-form input.advanced-search-submit:hover,
+#pubfinder-search-form input.main-submit:hover,
+#pubfinder-search-form input[type="submit"]:hover, #pubfinder-search-form input[type="submit"]:focus {
+  background: #0b5572;
+}
+
+#pubfinder-short-search-form .form-item, 
+#pubfinder-short-search-form .form-actions {
+    margin:0 0 10px 0;
+    width: 47%;
+    float: left;
+    margin-right: 2%;
+    min-height:45px;
+}
+#pubfinder-short-search-form .chosen-container{
+  margin-bottom: 0px;  
+}
+
+.vocabularies-wrapper .form-type-select label {
+  display: block;
+  overflow: hidden;
+  height: 1px;
+  text-indent: -200%;
+}
+
+/**
+ * advanced search
+ */
+
+#pubfinder-search-form .advanced-search-toggle {
+  width: 22%;
+  padding: 5px 5px;
+  margin: 0;
+  display: inline-block;
+  background: #eaeaea;
+  box-sizing: border-box;
+  text-decoration: none;
+  color: #0b5572;
+  cursor: pointer;
+  border-radius:4px 4px 4px 4px;
+  -webkit-user-select: none; -ms-user-select: none; user-select: none;
+}
+.ie8 #pubfinder-search-form .advanced-search-toggle,
+.ie9 #pubfinder-search-form .advanced-search-toggle {
+  padding: 5px 5px 6px 5px;
+}
+
+#pubfinder-search-form .advanced-search-toggle.active {
+  height: 36px;
+  border-radius:4px 4px 0px 0px;
+  margin-left: 61px;
+}
+.pubfinder-search-suggest {
+  font-size: 0.857em;
+}
+.pubfinder-search-suggest a {
+  text-decoration: none;
+}
+.region-content .pubfinder-search-suggest a:hover, .region-content .pubfinder-search-suggest a:active, .region-content .pubfinder-search-suggest a:focus {
+  text-decoration: underline;
+}
+.pubfinder-search-suggest a:hover, .pubfinder-search-suggest a:active,.pubfinder-search-suggest a:focus {
+  text-decoration: underline;
+}
+
+#pubfinder-search-form .vocabularies-wrapper {
+  background: #eaeaea;
+  padding: 20px;
+  position: absolute;
+  top: 43px;
+  right: 2px;
+  z-index: 999;
+}
+
+#zone-content .content .vocabularies-wrapper h3 {
+  color: #0b5572;
+  font-weight: normal;
+  margin-bottom: 10px;
+}
+
+#pubfinder-search-form .vocabularies-wrapper .form-type-select {
+  display: inline-block;
+  width: 49%;
+  margin: 0;
+}
+
+#pubfinder-search-form .vocabularies-wrapper .advanced-search-submit {
+  float: right;
+  margin: 20px 0 0 0;
+}
+
+/**
+ * sort select
+ */
+
+.pubfinder-sort {
+  text-align: right;
+  margin: 10px 0;
+}
+
+.pubfinder-sort label {
+  display: inline-block;
+}
+
+.pubfinder-sort select {
+  display: inline-block;
+}
+
+.no-js .pubfinder-sort {
+  display: none;
+}
+
+/**
+ * rotator
+ */
+.pubfinder-result-rotator {
+  position: relative;
+  margin-bottom: 1.5em;
+  border-bottom: 1px solid #CACACA;
+}
+
+.pubfinder-result-rotator ul {
+  margin: 20px 0 !important;
+  list-style: none !important;
+}
+
+.pubfinder-result-rotator ul li {
+  list-style: none !important;
+  vertical-align: top;
+  font-size: 0.714em;
+  font-size:0.857em;
+  line-height: 2em;
+  line-height:1.6em;
+  margin-right: 2%;
+  padding: 0;
+  transition: all 1s ease 0s;
+  width: 23%;
+  display: inline-block;
+  text-align: center;
+}
+.pubfinder-result-rotator ul li a span {
+  padding-top: 4px;
+  display: block;
+}
+.pubfinder-result-rotator ul li a {
+  color: #095876;
+  font-weight: normal;
+  text-decoration: none;
+}
+
+.pubfinder-result-rotator ul li a img {
+  max-width: 100%;
+  width: auto;
+}
+.pubfinder-result .pubfinder-query {color: #095876; margin: 0 0 1em 0;}
+.pubfinder-counts {font-size: 0.857em; margin: 0 0 1em 0;}
+.pubfinder-result-list h4 {margin: 0 0 1.5em 0;}
+#zone-content .pubfinder-item .teaser h3 {margin: 0;}
+#zone-content .pubfinder-item .teaser h3 a {text-decoration: none; margin: 0;}
+.pubfinder-result-list span.dates,
+.pubfinder-result-list-min span.dates{font-style: italic; font-size: .857em;}
+
+/* OTHER SEARCH RESULTS */
+#zone-content .content .pubfinder-usasearch-results h3 {
+  margin: 0;
+  font-weight:normal;
+  font-size:1em;
+}
+#zone-content .content .pubfinder-usasearch-results h3 a {
+  text-decoration: none;
+  color:#095876;
+}
+#zone-content .content .pubfinder-usasearch-results h3 a:hover, #zone-content .content .pubfinder-usasearch-results h3 a:active, #zone-content .content .pubfinder-usasearch-results h3 a:focus {
+  text-decoration: underline;
+}
+.pubfinder-usasearch-results > div, .pubfinder-usasearch-results > div > div {
+  margin: 0 0 1.5em 0;
+}
+.pubfinder-usasearch-results .description {
+  font-size: 0.786em;
+  color: #444;
+}
+.pubfinder-usasearch-results .url {
+  font-size:0.929em;
+}
+.pubfinder-usasearch-results .url a {
+  color:#095876; text-decoration: none;
+}
+.pubfinder-usasearch-results .url a:hover, .pubfinder-usasearch-results .url a:focus, .pubfinder-usasearch-results .url a:active {
+  text-decoration: underline;
+}
+fieldset.vocabularies-wrapper .chosen-container-multi .chosen-choices {
+background: none;
+background-image: none;
+border-radius: 0px;
+color: #095876;
+font-weight: normal;
+}
+fieldset.vocabularies-wrapper .chosen-container-active .chosen-choices {border-radius:0px;}
+fieldset.vocabularies-wrapper .chosen-container-multi .chosen-choices {background:#FFF; background-image:none; border-radius:0px; color: #095876; font-weight: normal; }
+.region-content .content fieldset.vocabularies-wrapper .chosen-container-multi ul.chosen-choices li.search-choice {margin:1px;}
+fieldset.vocabularies-wrapper .chosen-container {margin-bottom:15px;}
+.region-right-column fieldset.vocabularies-wrapper .chosen-container {margin-bottom:0px;}
+fieldset.vocabularies-wrapper .chosen-container-multi .chosen-choices li.search-field input[type="text"] {margin: 1px 0; padding: 1px 5px 1px 5px;}
+.block-refine-search .form-item {margin: .5em 0;}
+#zone-content .content .pubfinder-item p {margin-bottom: 1.4em;}
+#zone-content .content .pubfinder-item {margin-bottom: 2em; width:100%; float:left;}
+.page-publications-finder .add-this-block {display:none;}
+
+
+@media only screen and (min-device-width :  1px) and (max-device-width : 950px), (min-width : 1px) and (max-width : 950px) {
+  #pubfinder-search-form .vocabularies-wrapper {top: 81px;}
+  #pubfinder-search-form .advanced-search-toggle {width:160px; margin-left: 0px; display:block; float:none; clear:both;}
+  #pubfinder-search-form .advanced-search-toggle.active {width:160px; margin-left: 0px; display:block; float:none; clear:both;}
+  #pubfinder-search-form .vocabularies-wrapper {padding:10px 5px;}
+}
+

@@ -1,0 +1,110 @@
+#funding_app .funding_search {
+  text-align: right;
+}
+
+#funding_app .funding_search label {
+  display: inline;
+}
+
+#funding_app .funding_search form {
+  display: block;
+  float: right;
+  width: 290px;
+}
+
+#funding_app .funding_search .search_box {
+  text-align: left;
+  width: 150px;
+}
+
+#funding_app .funding_search .searched_text {
+  float: left;
+  font-style: italic;
+  margin: 10px 0;
+}
+
+#funding_app .funding_search .searched_text .term {
+  color: #ff0000;
+}
+
+#funding_app .funding_search .searched_text a {
+  font-style: normal;
+  text-decoration: none;
+}
+
+#funding_app .funding_tabs {
+  border-bottom: 1px solid #C3C3C3;
+  margin: 10px 0;
+}
+
+#funding_app .funding_tabs ul {
+  list-style: none;
+  margin: 0 !important;
+}
+
+#funding_app .funding_tabs ul li {
+  width: 23.6%;
+  padding: 0;
+  margin: 0;
+  display: inline-block;
+  zoom: 1;
+  *display: inline;
+}
+
+#funding_app .funding_tabs ul li a {
+  color: #0000EE;
+  border: 1px solid #C3C3C3;
+  border-bottom: none;
+  margin: 0 2px;
+  display: block;
+  text-align: center;
+  font-size: 13px;
+  padding: 5px 0;
+  text-decoration: none;
+  -moz-border-radius: 5px 5px 0 0;
+  -webkit-border-radius: 5px 5px 0 0;
+  border-radius: 5px 5px 0 0;
+}
+
+#funding_app .funding_tabs ul li a.active,
+#funding_app .funding_tabs ul li a:hover {
+  background: #E9E9E9;
+  color: #000;
+}
+
+#funding_app .funding_links {
+  text-align: right;
+}
+
+#funding_app .funding_links ul {
+  padding: 0;
+  margin: 10px 0 !important;
+}
+
+#funding_app .funding_links ul li {
+  display: inline;
+  padding: 0 0 0 20px;
+}
+
+#funding_app table thead tr .header {
+  /*background-image: url(../images/bg.gif);*/
+  background-image: url(https://www.drugabuse.gov/sites/all/modules/funding_tool/images/bg.gif);
+  background-repeat: no-repeat;
+  background-position: center right;
+  cursor: pointer;
+}
+
+#funding_app table thead tr .headerSortUp {
+  /*background-image: url(../images/asc.gif);*/
+  background-image:url(https://www.drugabuse.gov/sites/all/modules/funding_tool/images/asc.gif);
+}
+
+#funding_app table thead tr .headerSortDown {
+  /*background-image: url(../images/desc.gif);*/
+  background-image: url(https://www.drugabuse.gov/sites/all/modules/funding_tool/images/desc.gif);
+}
+
+#funding_app table tbody tr td.slugline,
+#funding_app table tbody tr td.date {
+  white-space: nowrap;
+}

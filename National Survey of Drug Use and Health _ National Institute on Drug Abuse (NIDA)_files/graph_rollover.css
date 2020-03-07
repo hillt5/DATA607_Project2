@@ -1,0 +1,49 @@
+.graph_rollover {
+  text-align: center
+}
+
+.graph_rollover .graphic {
+  display: inline-block;
+  margin: 0 auto;
+  position: relative;
+  zoom: 1;
+  *display: inline;
+}
+
+.graph_rollover .graphic .anno {
+  /*background: url(../images/spacer.gif) repeat;*/
+  background:url(https://www.drugabuse.gov/sites/all/modules/graph_rollover/images/spacer.gif);
+  position: absolute;
+  z-index: 100;
+}
+
+.graph_rollover .graphic .anno span {
+  padding: 4px 5px;
+  background: #fff;
+  border: 1px solid #a3a3a3;
+  color: #000;
+  width: 200px;
+  position: absolute;
+  left: 0;
+  z-index: 101;
+  font-size: 1.1em;
+  display: none;
+  text-align: left;
+}
+
+.graph_rollover .graphic .anno:hover span {
+  display: block;
+}
+
+.graph_rollover .annotations {
+  display: inline-block;
+  zoom: 1;
+  *display: inline;
+  padding: 20px;
+  text-align: left;
+  vertical-align: top;
+}
+
+.graph_rollover ul li a:hover {
+  text-decoration: underline;
+}

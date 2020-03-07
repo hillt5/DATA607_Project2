@@ -1,0 +1,17 @@
+.formRow{margin:10px 0;padding:0 0 0 10px;}
+.formRow label,.formRow input,.formRow div{display:inline-block;}.formRow label{width:25%;}.formRow.submit{text-align:center;}.widgetButtonText,.widgetButtonArrow{display:none;}.widgetSelectButton .widgetButtonText,.widgetSelectButton .widgetButtonArrow{display:block;}.widgetSelectButton .widgetButtonText{width:90%;text-align:center;}
+.widgetSelectButton{width:50%;position:relative;display:inline-block;padding: 0.6em 35px;color: #444444;font-weight: bold;border-radius: 1em 1em 1em 1em;border: 1px solid #CCCCCC;}
+.widgetSelectButton select{cursor: pointer;height: 100%;left: 0;opacity: 0;top: 0;width: 100%;position: absolute;}.widgetSelectButton input{height: 100%;left: 0;top: 0;width: 100%;position: absolute;border:1px solid transparent;padding:0;}.widgetButtonArrow{right: 15px;margin-top: -9px;position: absolute;top: 50%;height: 18px;width: 18px; background: url("../images/icons-18-white.png") no-repeat -216px 50% rgba(0, 0, 0, 0.4);border-radius: 9px 9px 9px 9px;}#fundingWidgetKeyword{width:50%;background:transparent url("../images/icon-search-black.png") no-repeat 8px 50%;background-size: 16px 16px;padding: 0.6em 35px;border-radius: 1em 1em 1em 1em;border: 1px solid #CCCCCC;}#fundingWidgetSubmit{width:65%;padding:7px 0;border-radius: 1em 1em 1em 1em;background: -moz-linear-gradient(center top , #FEFEFE, #EEEEEE) repeat scroll 0 0 #EEEEEE;border: 1px solid #CCCCCC;color: #444444;font-weight: bold;text-shadow: 0 1px 1px #F6F6F6;}.fundingWidgetMenu{display:none;}
+.homeContent .fundingWidgetMenu{display:block;}
+
+#fundingWidgetResultContainer{display:none;}
+	#fundingWidgetResultKeyword{color:#CC6600;}
+	#fundingWidgetResultType{color:#cc6600;}
+	#fundingWidgetResultList li h4{margin:0 0 5px 0;}
+	#fundingWidgetResultList li p{font-weight:normal;}
+#fundingWidgetResultSingle{padding: 20px;color: #000000;font-family: Arial;font-size: 0.9em;line-height: 1em;display:none;}
+#fundingWidgetResultSingle a.back{width:75px;text-align:center;padding:7px 10px;display:block;margin:0 0 20px 0;border-radius: 1em 1em 1em 1em;background: -moz-linear-gradient(center top , #FEFEFE, #EEEEEE) repeat scroll 0 0 #EEEEEE;border: 1px solid #CCCCCC;color: #444444;font-weight: bold;text-shadow: 0 1px 1px #F6F6F6;}
+#fundingWidgetResultSingle .heading1 {color: #993366;font-size: 1.2em;}
+#fundingWidgetResultSingle table {margin: 5px auto;}
+#fundingWidgetResultSingle table td{border:1px solid #000000;}
+#fundingWidgetResultSingle heading4{margin:15px;}

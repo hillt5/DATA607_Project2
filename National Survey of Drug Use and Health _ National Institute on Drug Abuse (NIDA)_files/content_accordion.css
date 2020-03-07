@@ -1,0 +1,41 @@
+/*.content-accordion .accordion-header {
+  cursor: pointer;
+  margin: 0 0 20px 0;
+  padding: 10px;
+  font-size: 1.2em;
+  font-weight: bold;
+  background: #f1f1f1;
+  border-radius: 5px;
+  border: 1px solid #CCC;
+  background: #f1f1f1 url('../images/plus-minus.png') 97% 8px no-repeat;
+}
+.content-accordion.open .accordion-header {
+  border-radius: 5px 5px 0 0;
+}
+.content-accordion .accordion-content {
+  overflow: visible;
+  padding: 10px;
+  border: 1px solid #CCC;
+  margin-top: -21px;
+  margin-bottom:2em;
+  background: #fff;
+  position: relative;
+  z-index: 50;
+  height: auto;
+}
+
+.content-accordion.open .accordion-header {
+  background: url('../images/plus-minus.png') 97% -70px no-repeat #f1f1f1;
+}
+
+.bodyAccordion.open .accordion-content {
+  display: block;
+}
+.accordion-content a, .accordion-content li {
+  word-wrap: break-word;
+}
+
+.accordion-header h5 {
+  margin-bottom:0;
+}
+*/

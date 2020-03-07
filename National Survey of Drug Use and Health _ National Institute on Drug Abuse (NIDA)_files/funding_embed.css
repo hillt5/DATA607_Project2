@@ -1,0 +1,5 @@
+.vertical-tabs-funding_embed .form-item{margin:3px 0;}
+.funding_embed_fieldset_type .form-item,
+.funding_embed_fieldset_status .form-item{display:inline-block;zoom:1;*display:inline;}
+
+.vertical-tabs-funding_embed .form-checkboxes{margin:0;}

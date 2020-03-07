@@ -1,0 +1,52 @@
+@media screen and (max-width: 600px) {
+  #zone-content .content .ppc-grid {
+    width: 98%; } }
+#zone-content .content p.ppc-text {
+  font-weight: bold;
+  padding: .75em 2% .75em;
+  margin-bottom: 0;
+  color: #576388; }
+#zone-content .content .ppc-row {
+  border-bottom: 1px solid #B1BFEC;
+  margin-bottom: .5em;
+  width: 100%;
+  margin-left: 0;
+  margin-right: 0;
+  min-height: 100px; }
+  #zone-content .content .ppc-row h3 {
+    font-weight: normal; }
+#zone-content .content .ppc-row:last-of-type {
+  border-bottom: none; }
+#zone-content .content .ppc-image {
+  border: 1px solid #CCC;
+  padding-top: 1px;
+  max-height: 100px;
+  overflow: hidden;
+  margin-bottom: .5em; }
+#zone-content .content .nida-notes-category-row {
+  padding: 0 1.6%; }
+#zone-content .content .ppc-category .nida-notes-category img {
+  -webkit-filter: grayscale(100%);
+  filter: grayscale(100%);
+  filter: url("data:image/svg+xml;utf8,<svg version='1.1' xmlns='http://www.w3.org/2000/svg' height='0'><filter id='greyscale'><feColorMatrix type='matrix' values='0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0' /></filter></svg>#greyscale"); }
+  #zone-content .content .ppc-category .nida-notes-category img:hover {
+    -webkit-filter: grayscale(50%);
+    filter: grayscale(50%); }
+#zone-content .content .see-all-categories {
+  margin-left: 1em; }
+#zone-content .content a.ppc-button {
+  border-radius: 5px;
+  box-sizing: border-box;
+  display: block;
+  padding: 1em 2em;
+  color: #FFF;
+  background: #004863;
+  text-align: center;
+  width: 100%;
+  font-size: 14px;
+  padding: .75em;
+  text-decoration: none; }
+  #zone-content .content a.ppc-button span {
+    display: none !important; }
+
+/*# sourceMappingURL=ppcpages.css.map */

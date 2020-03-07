@@ -1,0 +1,32 @@
+.fundingWidgetWrapper{padding:20px 12px;}
+.fundingWidgetWrapper input{background: url(../images/fundingWidgetBg.jpg) no-repeat #E1E1E1; overflow: hidden;height:27px;float:left;}
+.fundingWidgetWrapper .widgetText{height:27px;padding-left:5px;}
+.fundingWidgetWrapper .widgetButton{height:29px;padding:0;text-indent: -9999px;color:transparent;cursor: pointer; font-size:0px; line-height:0px;}
+
+.fundingWidget-small .widgetText{width:70%;background-position:0 0 !important; border-right:none!important;}
+.fundingWidget-small .widgetButton{width:39px; background:#d6e8fe; 
+	background: url(../images/search-icon-simple.png) no-repeat 9px 4px, linear-gradient(to bottom, #d6e8fe 0%,#aacef7 100%);
+background-size: 20px 20px, 100% 100%; border: 1px solid #999;}
+.lte9 .fundingWidget-small .widgetButton {background:url(../images/ie-search-icon-simple.png) no-repeat 0 0; background-size:37px 27px;}
+
+.fundingWidget-medium{padding:18px 12px; margin:0 1px 1px 1px; background:url(../images/fundingWidgetMedBg.jpg) repeat-x #E1E1E1;}
+.fundingWidget-medium .widgetText{width:54%; background-position:0 0;}
+.fundingWidget-medium .widgetButton{width:112px;background-position:-193px 0;}
+
+.fundingWidget-big h2{color:#004863;font-size:18px;font-weight: normal;}
+.fundingWidget-big .widgetText{width:188px; background-position:0 0; border-right:none!important;}
+.fundingWidget-big .widgetButton{width:112px;background-position:-193px 0;}
+
+#block-funding_widget-small .fundingWidgetWrapper h2{display:none;}
+#block-funding_widget-medium .fundingWidgetWrapper h2{display:none;}
+#block-funding_widget-medium .content{margin:0 !important;border:1px solid #cacaca; border-top:none;}
+
+@media only screen and (min-device-width : 600px) and (max-device-width : 816px), (min-width : 600px) and (max-width : 816px) {
+    .block-funding-widget-medium input[type="submit"].widgetButton { background: url(../images/fundingWidgetBg.jpg) no-repeat scroll -160px -29px transparent!important; width: 40px!important;}
+    .fundingWidget-medium .widgetText { width: 73%!important;}
+}
+
+@media only screen and (min-device-width : 1px) and (max-device-width : 600px), (min-width : 1px) and (max-width : 600px) {
+    .fundingWidget-medium .widgetText { width: 50%; max-width: 192px!important;}
+    .fundingWidget-big .widgetText {width:50%; max-width:192px;}
+}

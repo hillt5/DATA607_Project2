@@ -1,0 +1,6 @@
+.nmassist_api{border:none;padding:0;}
+.nmassist_api_logout{}
+
+body.page-nmassist-api fieldset{padding:10px;margin:20px 0;border:1px solid #000;}
+body.page-nmassist-api fieldset table{width:auto;}
+body.page-nmassist-api div.messages{display: block !important; margin:0 0 20px 0 !important;}

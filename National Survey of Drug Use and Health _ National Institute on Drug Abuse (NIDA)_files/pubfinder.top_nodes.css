@@ -1,0 +1,55 @@
+.pubfinder-lazy-content {
+  margin: 10px 0;
+  padding: 5px 0;
+  display: none;
+  border:none;
+  border-bottom:5px solid #CACACA;
+}
+.pubfinder-lazy-content h2 {color: #095876; font-family: Arial; font-size: 1.143em; margin:0 0 .5em 0;}
+
+.pubfinder-content-loading .content {
+  /*background-image: url(../images/loading.gif);*/
+  background-image: url(https://www.drugabuse.gov/sites/all/modules/nida/pubfinder/images/loading.gif);
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: 150px 30px;
+  height: 50px;
+}
+
+.pubfinder-lazy-content.pubfinder-content-loading,
+.pubfinder-lazy-content.pubfinder-content-processed{
+  display: block;
+}
+
+.pubfinder-lazy-content.pubfinder-no-content {
+  display: none;
+}
+.region-right-column .block-pubfinder-refine-search .block-inner,
+.region-right-column .no-background ul li,
+.region-right-column .no-background .block-inner .content {background:none;}
+
+.region-right-column .no-padding .block-inner ul li,
+.region-right-column .no-padding ul li {padding:0px;}
+
+.region-right-column .no-background ul li,
+.region-right-column .no-background .block-inner .content {background:none;}
+
+.region-right-column .no-borders .block-inner ul li,
+.region-right-column .no-borders .block-inner .content {border:none;} 
+
+.region-right-column .no-background.no-borders .block-inner  ul li,
+.region-right-column .pubfinder-lazy-content ul li {margin-bottom:10px;}
+
+.region-right-column .block.no-margins {margin:0px;}
+.region-right-column .block.no-margins.block-pubfinder-refine-search {margin-top: 14px;}
+
+/*  @todo, figure out how the CSS should cascade better*/
+/* using block classes instead, to generalize styles and remove some redundancy/importats! */
+
+.block-pubfinder-refine-search h2.block-title {background: none; border:none; border-radius: 0px; color:#095876; font-weight: normal; line-height: 1.4em; margin: 0; padding:0px;}
+
+.region-right-column .chosen-container-active .chosen-choices {border-radius:0px;}
+.region-right-column .chosen-container-multi .chosen-choices {background:none; background-image:none; border-radius:0px; color: #095876; font-weight: normal; }
+.region-right-column .no-background.no-borders .block-inner ul.chosen-choices li {margin:1px;}
+.region-right-column .chosen-container-multi .chosen-choices li.search-field input[type="text"] {margin: 1px 0; padding: 1px 5px 1px 5px;}
+
