@@ -1,0 +1,316 @@
+---
+title: "DATA607_project2"
+author: "Thomas Hill"
+date: "3/7/2020"
+output: html_document
+---
+
+
+# HCAHPS Patient Survey Results by State
+
+HCAHPS are patient surveys conducted independently after patients are hospitalized. In this dataset, they are reported by state. I'll start by converting the .csv to dataframe. I also added a command to change "Not Available" to NA instead and ensure that the percent column is numeric.  I also removed the three leftmost columns as these contained no new information -- survey results are from the same timeframe between August 2018 through March of 2019.
+
+```{r convert-hcahps-csv}
+library(tidyr)
+library(dplyr)
+library(stringr)
+
+HCAHPS_orig <- read.csv("https://raw.githubusercontent.com/hillt5/DATA607_Project2/master/Patient_survey__HCAHPS__-_State.csv") %>%
+  na_if("Not Available")
+HCAHPS_orig$HCAHPS.Answer.Percent <- as.numeric(HCAHPS_orig$HCAHPS.Answer.Percent)
+HCAHPS_orig <- HCAHPS_orig[-c(6,7,8,9)]
+head(HCAHPS_orig)
+```
+
+As expected, results are reported by state/territory, then by ordinal response to HCAHPS question - 'always, usually, sometimes-never' or 'Strongly agree, agree...'- in addition to answer percent.  There is also a column with measure ID's, which appear to characterize the question being asked in addition to the response.  This column may be important for comparing reponses. 
+
+```{r HCAHPS-summary}
+
+colnames((HCAHPS_orig))
+sort(unique(HCAHPS_orig$HCAHPS.Measure.ID))
+
+```
+
+After sorting through all of the values for ID, there are 72 unique entries, with 3 values per question for the ratings. The 'COMP' values also have a number attached to them which appear to specify the staff member in question - nurse, doctor, staff. A few variables I'm particularly interested in looking at are 'clean' and 'quiet' responses, as I can say anecdotally this is something that every hospital I've worked at has monitored.  There are also some yes/no questions about staff members communicating specific things, like information about side effects, what to expect after discharge,  and whether the patient would recommend the hospital. Finally, there is a 1-10 rating of the hospital overall.   
+
+
+# Looking at Favorable Ratings by State
+
+I'll start by looking at favorability ratings by state. I'll start by looking at 1-10 rating, with good favorability being scores of 9-10.
+
+```{r favorability-by-state-9-or-10}
+
+HCAHPS_state_fav910 <- drop_na(HCAHPS_orig) %>%
+  select(State, HCAHPS.Measure.ID, HCAHPS.Answer.Percent) %>%
+  filter(HCAHPS.Measure.ID == "H_HSP_RATING_9_10")%>%
+  spread(HCAHPS.Measure.ID, HCAHPS.Answer.Percent) %>%
+  group_by(State) %>%
+  arrange(desc(H_HSP_RATING_9_10))
+
+head(HCAHPS_state_fav910,10)
+tail(HCAHPS_state_fav910)
+summary(HCAHPS_state_fav910$H_HSP_RATING_9_10)
+hist(HCAHPS_state_fav910$H_HSP_RATING_9_10)
+```
+
+States/territories reporting favorability data had at least of 58% of their hospitals rated as 9 or 10. Almost all of the top performers are the Midwestern states, with one exception of Louisiana. The high favorability dips in more densely populated areas, like Washington DC/ Maryland and New York/New Jersey. Puerto Rico is also noteworthy as a territory who may be still recovering from a series of devastating hurricaines in 2017.  Overall, results indicate that over half of patients surveyed are giving the hospitals nearly perfect ratings. To verify this, I'm going to see if people would recommend the hospital, and also see if their are inverse patterns for poor ratings - less than 7/10 on a scale of 10.
+
+
+```{r favorability-by-state-6-or-lower}
+
+HCAHPS_state_fav06 <- drop_na(HCAHPS_orig) %>%
+  select(State, HCAHPS.Measure.ID, HCAHPS.Answer.Percent) %>%
+  filter(HCAHPS.Measure.ID == "H_HSP_RATING_0_6")%>%
+  spread(HCAHPS.Measure.ID, HCAHPS.Answer.Percent) %>%
+  group_by(State) %>%
+  arrange(desc(H_HSP_RATING_0_6))
+
+tail(HCAHPS_state_fav06, 10)
+head(HCAHPS_state_fav06)
+
+summary(HCAHPS_state_fav06$H_HSP_RATING_0_6)
+hist(HCAHPS_state_fav06$H_HSP_RATING_0_6)
+```  
+
+
+Conversely, there appears to be a lot more variability when scores 0-6 are compared on a state-by-state basis. Looking at the histogram, a handful of states tend to have low 0-6 ratings.  Looking at the tail, these are generally more densely populated states, in addition to Florida and Nevada, two states attractive to retirees. States with persistently low hospital ratings include Southwestern states Arizona, New Mexico, and California, as well as Southern states Alabama and Georgia.  Southwestern states like NM and AZ in particular have higher Native American populations serviced by their own federal health service - IHS or Indian Health Service. As a final step to gauging favorability, I will omit the cluster of low scores from the 0-6 ratings, and perform the same summaries on another revealing question -- whether the patient would NOT recommend the hospital.
+
+```{r favorability-by-state-6-or-lower-minus-outliers}
+
+HCAHPS_state_fav06_norm <- HCAHPS_state_fav06 %>%
+  filter(H_HSP_RATING_0_6 > 10)
+  
+tail(HCAHPS_state_fav06_norm, 10)
+summary(HCAHPS_state_fav06_norm$H_HSP_RATING_0_6)
+hist(HCAHPS_state_fav06_norm$H_HSP_RATING_0_6)
+```
+Omitting the outliers, this generally matches up with the highest-rated states mentioned previously - generally Midwest and Western states.
+
+
+```{r unfavorability-by-NO-recommendation}
+
+HCAHPS_state_bad_rec <- drop_na(HCAHPS_orig) %>%
+  select(State, HCAHPS.Measure.ID, HCAHPS.Answer.Percent) %>%
+  filter(HCAHPS.Measure.ID == "H_RECMND_DN")%>%
+  spread(HCAHPS.Measure.ID, HCAHPS.Answer.Percent) %>%
+  group_by(State) %>%
+  arrange(H_RECMND_DN)
+
+head(HCAHPS_state_bad_rec,10)
+tail(HCAHPS_state_bad_rec)
+summary(HCAHPS_state_bad_rec$H_RECMND_DN)
+hist(HCAHPS_state_bad_rec$H_RECMND_DN)
+```
+
+```{r no-recommendation-by-state-minus-outliers}
+
+HCAHPS_state_bad_rec_norm <- HCAHPS_state_bad_rec %>%
+  filter(H_RECMND_DN > 10 && H_RECMND_DN < 89)
+  
+head(HCAHPS_state_bad_rec_norm,10)
+tail(HCAHPS_state_bad_rec_norm)
+summary(HCAHPS_state_bad_rec_norm$H_RECMND_DN)
+hist(HCAHPS_state_bad_rec_norm$H_RECMND_DN)
+```
+
+Looking at the negative recommendation survey question, this mostly agrees with states having low favorability ratings. There were a few very high and very low values that I omitted, but it didn't meaningfully change the other parameters. Overall, I feel safe to conclude that patients think favorably of more rural, Midwestern states and less favorably of urban hospitals. However, there also exist other important exceptions hinted at in the ratings, including states with large retiree populations, native populations, or areas recently affected by natural disasters.
+
+# Search for an Explanatory Variable: Cleanliness and Noisiness of Hospital Stay
+
+As mentioned earlier, two explanatory variables that may underly favorability are the cleanliness and noisiness of the hospital environment.  These are particularly interesting factors as they are tied toward the performance of support staff such as custodians and nursing assistants to respond to the non-medical issues of a patient's hospital course. I also suspect they are tied to the turnover of a hospital - busier hospitals are louder spaces and require increased attention to keeping floors clean, call buttons answered, etc.
+
+I will start by looking at cleanliness results:
+
+```{r cleanliness-by-state}
+
+HCAHPS_state_wide <- drop_na(HCAHPS_orig) %>%
+  select(State, HCAHPS.Measure.ID, HCAHPS.Answer.Percent) %>%
+  spread(HCAHPS.Measure.ID, HCAHPS.Answer.Percent)
+         
+HCAHPS_state_cleanliness <- HCAHPS_state_wide %>%
+  select(State, H_CLEAN_HSP_A_P, H_CLEAN_HSP_U_P) %>%
+  group_by(State) %>%
+  mutate(Pct_Always_Usually_Clean = as.numeric(sum(H_CLEAN_HSP_A_P, H_CLEAN_HSP_U_P))) %>%
+  arrange(desc(Pct_Always_Usually_Clean))
+
+HCAHPS_state_cleanliness_bad <- HCAHPS_state_wide %>%
+  select(State, H_CLEAN_HSP_SN_P) %>%
+  group_by(State) %>%
+  arrange(desc(H_CLEAN_HSP_SN_P))
+
+head(HCAHPS_state_cleanliness,10)
+tail(HCAHPS_state_cleanliness)
+summary(HCAHPS_state_cleanliness$Pct_Always_Usually_Clean)
+hist(HCAHPS_state_cleanliness$Pct_Always_Usually_Clean)
+
+head(HCAHPS_state_cleanliness_bad,10)
+tail(HCAHPS_state_cleanliness_bad)
+
+```
+
+Scores for cleanliness are overall very high with a minimum 75% of surveys reporting usually or always clean environment. The results are highly concentrated between 82-84%, which encompasses half of the states.
+
+```{r noisiness-by-state}
+HCAHPS_state_noisiness <- HCAHPS_state_wide %>%
+  select(State, H_QUIET_HSP_A_P, H_QUIET_HSP_U_P) %>%
+  group_by(State) %>%
+  mutate(Pct_Always_Usually_Quiet = as.numeric(sum(H_QUIET_HSP_A_P, H_QUIET_HSP_U_P))) %>%
+  arrange(desc(Pct_Always_Usually_Quiet))
+
+HCAHPS_state_noisiness_bad <- HCAHPS_state_wide %>%
+  select(State, H_QUIET_HSP_SN_P) %>%
+  group_by(State) %>%
+  arrange(desc(H_QUIET_HSP_SN_P))
+
+head(HCAHPS_state_noisiness,10)
+tail(HCAHPS_state_noisiness)
+summary(HCAHPS_state_noisiness$Pct_Always_Usually_Quiet)
+hist(HCAHPS_state_noisiness$Pct_Always_Usually_Quiet)
+
+head(HCAHPS_state_noisiness_bad, 10)
+tail(HCAHPS_state_noisiness_bad)
+```  
+
+
+Again, these perecents are overwhelmingly favorable but some of the top favorable states do appear to be the quietests. As one last chance to see any correlation between favorability and noisiness, I'll plot favorability versus quiet.
+
+
+```{r favorability-vs-noisiness}
+library(ggplot2)
+HCAHPS_fav_vs_noisiness <- HCAHPS_state_wide %>%
+  select(State, H_HSP_RATING_9_10, H_QUIET_HSP_A_P, H_QUIET_HSP_U_P) %>%
+  group_by(State) %>%
+  mutate(Pct_Always_Usually_Quiet = as.numeric(sum(H_QUIET_HSP_A_P, H_QUIET_HSP_U_P))) %>%
+  ggplot(aes(x = Pct_Always_Usually_Quiet, y = H_HSP_RATING_9_10)) + geom_point()
+
+HCAHPS_fav_vs_noisiness
+```  
+
+
+# Conclusions
+
+There appears to be a loose positive correlation between how quiet a hospital is during a patient's stay and a consequent high rating.  For the purposes of this project I limited myself to investigating the relationship between favorability and two plausible explanatory variables. Alternatively, I could have taken a more comprehensive exploration of HCAHPS scores by initially using ggplot and the function facet_wrap to compare all variables to favorable survey results.  This would have generated dozens of scatterplots and the most highly correlated plots could have been investigated further.  
+
+--------------------------------------------------------------------------------
+
+\clearpage
+
+
+# Under 5 Mortality by Country, Year
+
+Mortality for children under ages 5 is a noteworthy statistic as it is historically a driver of increasing life expectancy and indicates transition to a more developed society.  In this data set, the under 5 mortality rate is given as the rate per 1,000 live births.
+```{r convert-under-5-mort}
+
+under_5_mort_orig <- read.csv("https://raw.githubusercontent.com/hillt5/DATA607_Project2/master/unicef-u5mr.csv")
+head(under_5_mort_orig)
+```  
+
+
+I'll start by getting the data in a tall format. Judging from the head, there are also many missing values prior to the 1980's.
+
+```{r tall-mortality}
+
+u5m_tall <- under_5_mort_orig %>%
+  gather(Year, Under_5_Mortality_Rate, U5MR.1950:U5MR.2015) %>%
+  separate("Year", c(NA, "Year"), convert = TRUE)
+
+head(u5m_tall)
+```  
+
+
+Then I calculated the average under 5 mortality by year.  
+```{r tall-mortality-by-year}
+
+average_u5m_by_year <- u5m_tall %>%
+group_by(Year) %>%
+  summarize(mean_U5MR = mean(Under_5_Mortality_Rate, na.rm = TRUE))
+
+
+ggplot(average_u5m_by_year, aes(x = Year, y = mean_U5MR )) + geom_point()
+```  
+
+\newline
+After some ups and downs in the late 1950's, under five infant mortality has steadily decreased to an average value of 40 deaths per 1,000 live births.  However, this number is likely to underestimate the true decrease in mortality rate as it is not population weighted. Countries like India and China have populations an order of magnitude larger than many other countries, so for future analysis I'll make comparisons on a by-country basis.
+
+```{r mortality-in-north-america}
+North_America <- c("Canada", "Mexico", "United States of America")
+u5m_plot <- u5m_tall %>%
+  filter(CountryName == North_America) %>%
+  ggplot( aes(x = Year, y = Under_5_Mortality_Rate, color = CountryName)) + geom_point()
+u5m_plot
+```  
+
+\newline
+Above I've looked at the three countries that comprise North America. All three countries experienced significant decreases in under 5 mortality rates, although Mexico experienced the most extreme decrease over the time period.
+
+# Conclusion
+
+This data set is very useful to commpare a given country's decrease in under 5 mortality over the appxorimately 65 year period from 1950 to 2015.  Limitations include missing information with respect to mortality rates for many countries in the first two decades. In addition there is a lack of other demographic information like population that would add context to the absolute under 5 mortality as well as provide the necessary information for a worldwide mortality rate.
+
+--------------------------------------------------------------------------------
+
+\clearpage
+
+
+# National Survey of Drug Use, Ages 12 +
+
+```{r convert-drug-use}
+
+library(rvest)
+
+url <- "https://www.drugabuse.gov/national-survey-drug-use-health"
+drug_use_orig <- url %>% 
+  xml2::read_html() %>%
+  html_nodes(xpath='//*[@id="node-4661"]/div/div/div/div/div/table') %>%
+  html_table(header = TRUE, fill = TRUE)
+drug_use_orig <- as.data.frame(drug_use_orig)
+head(drug_use_orig)
+drug_use_orig <- drug_use_orig[-1,]
+head(drug_use_orig)
+```  
+
+
+Above are survey results for 2016 - 2018 for drug, alcohol, and tobacco abuse for subjects ages 12 and older.  According to authors, there were some methodological changes after 2016 that make it difficult to compare to previous years.  Looking at the first few rows, there appears to be a subheader further distinguishing between the three years. Additionally, the original table has subheaders for each substance indicating rates of lifetime use, as well as use in the last month and year.  
+
+```{r drug-abuse-tall}
+drug_abuse_tall_2016 <- drug_use_orig %>%
+  select(Drug, Time.Period, Ages.12.or.Older, Ages.12.to.17, Ages.18.to.25, Ages.26.or.Older) %>%
+  gather(Age_Group, "Percent Use, 2016", Ages.12.or.Older:Ages.26.or.Older)
+drug_abuse_tall_2016$`Percent Use, 2016` <- as.numeric(drug_abuse_tall_2016$`Percent Use, 2016`)
+
+drug_abuse_tall_2017 <- drug_use_orig %>%
+  select(Drug, Time.Period, Ages.12.or.Older.1, Ages.12.to.17.1, Ages.18.to.25.1, Ages.26.or.Older.1) %>%
+  gather(Age_Group, "Percent Use, 2017", Ages.12.or.Older.1:Ages.26.or.Older.1)
+drug_abuse_tall_2017$`Percent Use, 2017` <- as.numeric(drug_abuse_tall_2017$`Percent Use, 2017`)
+
+drug_abuse_tall_2018 <- drug_use_orig %>%
+  select(Drug, Time.Period, Ages.12.or.Older.2, Ages.12.to.17.2, Ages.18.to.25.2, Ages.26.or.Older.2) %>%
+  gather(Age_Group, "Percent Use, 2018", Ages.12.or.Older.2:Ages.26.or.Older.2)
+drug_abuse_tall_2018$`Percent Use, 2018` <- as.numeric(drug_abuse_tall_2018$`Percent Use, 2018`)
+
+drug_abuse_tall <- cbind(drug_abuse_tall_2016,"Percent Use, 2017" = drug_abuse_tall_2017$`Percent Use, 2017`,"Percent Use, 2018" = drug_abuse_tall_2018$`Percent Use, 2018`)
+head(drug_abuse_tall)
+```  
+
+
+After separating the original dataframe into three separate ones per year, I added the Percent Use columns into a single dataframe. Next, I'll explore the Percent Lifetime Use for Illicit Drugs.
+
+```{r lifetime-use-per-category}
+
+drug_abuse_lifetime <- drug_abuse_tall %>%
+  filter(Time.Period == 'Lifetime', Drug == 'Illicit Drugs') %>%
+  gather(Year, Percent, 'Percent Use, 2016':'Percent Use, 2018') %>%
+  separate(Year, c(NA, "Year"), sep = ",", convert = TRUE)
+drug_abuse_lifetime
+
+library(ggplot2)
+plot_drug_abuse <- drug_abuse_lifetime %>%
+  ggplot(aes(x= Year, y = Percent)) + geom_bar(stat = "identity") +
+  facet_wrap(~Age_Group)
+
+plot_drug_abuse
+```  
+
+\newline
+# Conclusion
+I only had time to perform a preliminary look into drug abuse rates, but I was able to facet_wrap in order to see a comparison of the three age groups part of the survey. Illicit drug use remains lowest in children, with ages 18-25 most likely to report use. However, the biggest increase from 2016 to 2018 happened in the 12-17 group.  
